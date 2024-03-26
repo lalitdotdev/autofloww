@@ -29,7 +29,7 @@ const MenuOptions = (props: Props) => {
                     className="flex font-bold flex-row "
                     href="/"
                 >
-                    <Image src="/fluxLogo.png" width={30} height={30} />
+                    <Image src="/fluxLogo.png" width={30} height={30} alt="" />
                 </Link>
                 <TooltipProvider>
                     {menuOptions.map((menuItem) => (
