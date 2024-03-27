@@ -1,6 +1,7 @@
 "use client"
 
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
+import { useEffect, useState } from "react";
 
 import { Button } from "../ui/button";
 import { EditUserProfileSchema } from "@/lib/types"
@@ -8,7 +9,6 @@ import { Input } from "../ui/input";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form"
-import { useState } from "react";
 import { z } from "zod"
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -38,6 +38,12 @@ const ProfileForm = ({ user, onUpdate }: ProfileFormProps) => {
         await onUpdate(values.name)
         setIsLoading(false)
     }
+
+
+
+    useEffect(() => {
+        form.reset({ name: user.name, email: user.email })
+    }, [user])
 
 
 
