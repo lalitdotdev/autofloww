@@ -72,6 +72,25 @@ const ProfileForm = ({ user, onUpdate }: ProfileFormProps) => {
                     )}
                 />
 
+                <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel className="text-lg">Email</FormLabel>
+                            <FormControl>
+                                <Input
+                                    {...field}
+                                    disabled={true}
+                                    placeholder="Email"
+                                    type="email"
+                                />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+
                 <Button
                     type="submit"
                     className="self-start hover:bg-[#2F006B] hover:text-white "
