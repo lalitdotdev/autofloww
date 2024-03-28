@@ -1,5 +1,6 @@
 import "./globals.css";
 
+import { ClerkProvider } from '@clerk/nextjs'
 import { DM_Sans } from "next/font/google";
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/providers/theme-provider";
@@ -19,20 +20,22 @@ export default function RootLayout({
 }>) {
     return (
 
-
-        <html lang="en">
-            <body className={font.className}>
-                <ThemeProvider
-                    attribute="class"
-                    defaultTheme="dark"
-                    enableSystem
-                    disableTransitionOnChange
-                >
-                    {children}
-                    <Toaster />
-                </ThemeProvider>
-            </body>
-        </html>
-
+        <ClerkProvider
+            publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+        >
+            <html lang="en">
+                <body className={font.className}>
+                    <ThemeProvider
+                        attribute="class"
+                        defaultTheme="dark"
+                        enableSystem
+                        disableTransitionOnChange
+                    >
+                        {children}
+                        <Toaster />
+                    </ThemeProvider>
+                </body>
+            </html>
+        </ClerkProvider >
     );
 }
