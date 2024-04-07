@@ -13,10 +13,9 @@ import { EditorCanvasDefaultCardTypes } from '@/lib/constant'
 import EditorCanvasIconHelper from './editor-canvas-card-icon-helper'
 import React from 'react'
 import { Separator } from '@/components/ui/separator'
+import { onDragStart } from '@/lib/editor-utils'
 import { useEditor } from '@/providers/editor-provider'
 import { useNodeConnections } from '@/providers/connections-provider'
-
-// import { onDragStart } from '@/lib/editor-utils'
 
 type Props = {
     nodes: EditorNodeType[]
@@ -52,9 +51,9 @@ const EditorCanvasSidebar = ({ nodes }: Props) => {
                                 key={cardKey}
                                 draggable
                                 className="w-full cursor-grab border-black bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-900"
-                            // onDragStart={(event) =>
-                            //     onDragStart(event, cardKey as EditorCanvasTypes)
-                            // }
+                                onDragStart={(event) =>
+                                onDragStart(event, cardKey as EditorCanvasTypes)
+                            }
                             >
                                 <CardHeader className="flex flex-row items-center gap-4 p-4">
                                     <EditorCanvasIconHelper type={cardKey as EditorCanvasTypes} />
