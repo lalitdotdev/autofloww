@@ -108,7 +108,12 @@ const ContentBasedOnTitle = ({
                         </Card>
                     )}
                     {title === 'Google Drive' && <GoogleDriveFiles />}
-
+                    <ActionButton
+                        currentService={title}
+                        nodeConnection={nodeConnection}
+                        channels={selectedSlackChannels}
+                        setChannels={setSelectedSlackChannels}
+                    />
                 </div>
             </Card>
         </AccordionContent>
