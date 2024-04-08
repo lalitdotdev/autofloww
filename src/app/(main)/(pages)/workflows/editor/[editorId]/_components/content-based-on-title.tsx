@@ -90,6 +90,24 @@ const ContentBasedOnTitle = ({
                         value={nodeConnectionType.content}
                         onChange={(event) => onContentChange(nodeConnection, title, event)}
                     />
+
+                    {JSON.stringify(file) !== '{}' && title !== 'Google Drive' && (
+                        <Card className="w-full">
+                            <CardContent className="px-2 py-3">
+                                <div className="flex flex-col gap-4">
+                                    <CardDescription>Drive File</CardDescription>
+                                    <div className="flex flex-wrap gap-2">
+                                        <GoogleFileDetails
+                                            nodeConnection={nodeConnection}
+                                            title={title}
+                                            gFile={file}
+                                        />
+                                    </div>
+                                </div>
+                            </CardContent>
+                        </Card>
+                    )}
+
                 </div>
             </Card>
         </AccordionContent>
