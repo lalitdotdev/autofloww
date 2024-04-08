@@ -74,9 +74,20 @@ const ContentBasedOnTitle = ({
     if (!isConnected) return <p>Not connected</p>
 
     return (
-        <div>
-            Content based on title.
-        </div>
+        <AccordionContent>
+            <Card>
+                {title === 'Discord' && (
+                    <CardHeader>
+                        <CardTitle>{nodeConnectionType.webhookName}</CardTitle>
+                        <CardDescription>{nodeConnectionType.guildName}</CardDescription>
+                    </CardHeader>
+                )}
+                <div className="flex flex-col gap-3 px-6 py-3 pb-20">
+                    <p>{title === 'Notion' ? 'Values to be stored' : 'Message'}</p>
+
+                </div>
+            </Card>
+        </AccordionContent>
     )
 }
 
