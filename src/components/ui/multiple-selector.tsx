@@ -330,7 +330,10 @@ const MultipleSelector = React.forwardRef<
             return <CommandEmpty>{emptyIndicator}</CommandEmpty>
         }, [creatable, emptyIndicator, onSearch, options])
 
-
+        const selectables = React.useMemo<GroupOption>(
+            () => removePickedOption(options, selected),
+            [options, selected]
+        )
 
         return (
             <div>
