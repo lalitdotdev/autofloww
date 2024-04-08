@@ -135,6 +135,26 @@ function removePickedOption(groupOption: GroupOption, picked: Option[]) {
  * @reference: https://github.com/hsuanyi-chou/shadcn-ui-expansions/issues/34#issuecomment-1949561607
  **/
 
+const CommandEmpty = forwardRef<
+    HTMLDivElement,
+    React.ComponentProps<typeof CommandPrimitive.Empty>
+>(({ className, ...props }, forwardedRef) => {
+    const render = useCommandState((state) => state.filtered.count === 0)
+
+    if (!render) return null
+
+    return (
+        <div
+            ref={forwardedRef}
+            className={cn('py-6 text-center text-sm', className)}
+            cmdk-empty=""
+            role="presentation"
+            {...props}
+        />
+    )
+})
+
+CommandEmpty.displayName = 'CommandEmpty'
 
 const MultipleSelector = React.forwardRef<
     MultipleSelectorRef,
@@ -330,7 +350,7 @@ const MultipleSelector = React.forwardRef<
 
         return (
             <div>
-                MultipleSelector
+                Multiple selector
             </div>
         )
     }
