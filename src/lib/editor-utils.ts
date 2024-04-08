@@ -23,3 +23,13 @@ export const onDiscordContent = (
     content: event.target.value,
   }));
 };
+
+export const onNotionContent = (
+  nodeConnection: ConnectionProviderProps,
+  event: React.ChangeEvent<HTMLInputElement>,
+) => {
+  nodeConnection.setNotionNode((prev: any) => ({
+    ...prev,
+    content: event.target.value,
+  }));
+};
