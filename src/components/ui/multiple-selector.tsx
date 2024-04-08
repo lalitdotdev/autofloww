@@ -275,6 +275,43 @@ const MultipleSelector = React.forwardRef<
             void exec()
         }, [debouncedSearchTerm, open])
 
+        const CreatableItem = () => {
+            if (!creatable) return undefined
+
+            const Item = (
+                <CommandItem
+                    value={inputValue}
+                    className="cursor-pointer"
+                    onMouseDown={(e) => {
+                        e.preventDefault()
+                        e.stopPropagation()
+                    }}
+                    onSelect={(value: string) => {
+                        if (selected.length >= maxSelected) {
+                            onMaxSelected?.(selected.length)
+                            return
+                        }
+                        setInputValue('')
+                        const newOptions = [...selected, { value, label: value }]
+                        setSelected(newOptions)
+                        onChange?.(newOptions)
+                    }}
+                >{`Create "${inputValue}"`}</CommandItem>
+            )
+
+            // For normal creatable
+            if (!onSearch && inputValue.length > 0) {
+                return Item
+            }
+
+            // For async search creatable. avoid showing creatable item before loading at first.
+            if (onSearch && debouncedSearchTerm.length > 0 && !isLoading) {
+                return Item
+            }
+
+            return undefined
+        }
+
 
 
         return (
