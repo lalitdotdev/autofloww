@@ -406,8 +406,35 @@ const MultipleSelector = React.forwardRef<
                                 </Badge>
                             )
                         })}
-
-
+                        {/* Avoid having the "Search" Icon */}
+                        <CommandPrimitive.Input
+                            {...inputProps}
+                            ref={inputRef}
+                            value={inputValue}
+                            disabled={disabled}
+                            onValueChange={(value) => {
+                                setInputValue(value)
+                                inputProps?.onValueChange?.(value)
+                            }}
+                            onBlur={(event) => {
+                                setOpen(false)
+                                inputProps?.onBlur?.(event)
+                            }}
+                            onFocus={(event) => {
+                                setOpen(true)
+                                triggerSearchOnFocus && onSearch?.(debouncedSearchTerm)
+                                inputProps?.onFocus?.(event)
+                            }}
+                            placeholder={
+                                hidePlaceholderWhenSelected && selected.length !== 0
+                                    ? ''
+                                    : placeholder
+                            }
+                            className={cn(
+                                'ml-2 flex-1 bg-transparent outline-none placeholder:text-muted-foreground',
+                                inputProps?.className
+                            )}
+                        />
                     </div>
                 </div>
 
