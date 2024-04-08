@@ -107,6 +107,7 @@ const ContentBasedOnTitle = ({
                             </CardContent>
                         </Card>
                     )}
+                    {title === 'Google Drive' && <GoogleDriveFiles />}
 
                 </div>
             </Card>
