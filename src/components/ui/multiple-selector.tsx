@@ -134,7 +134,6 @@ function removePickedOption(groupOption: GroupOption, picked: Option[]) {
  *
  * @reference: https://github.com/hsuanyi-chou/shadcn-ui-expansions/issues/34#issuecomment-1949561607
  **/
-
 const CommandEmpty = forwardRef<
     HTMLDivElement,
     React.ComponentProps<typeof CommandPrimitive.Empty>
@@ -250,8 +249,6 @@ const MultipleSelector = React.forwardRef<
             }
         }, [arrayDefaultOptions, arrayOptions, groupBy, onSearch, options])
 
-
-
         useEffect(() => {
             const doSearch = async () => {
                 setIsLoading(true)
@@ -334,6 +331,8 @@ const MultipleSelector = React.forwardRef<
             () => removePickedOption(options, selected),
             [options, selected]
         )
+
+        /** Avoid Creatable Selector freezing or lagging when paste a long string. */
         const commandFilter = React.useCallback(() => {
             if (commandProps?.filter) {
                 return commandProps.filter
@@ -347,6 +346,7 @@ const MultipleSelector = React.forwardRef<
             // Using default filter in `cmdk`. We don't have to provide it.
             return undefined
         }, [creatable, commandProps?.filter])
+
         return (
             <Command
                 {...commandProps}
