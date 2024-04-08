@@ -61,3 +61,11 @@ export const onAddTemplateDiscord = (nodeConnection: ConnectionProviderProps, te
     content: `${prev.content} ${template}`,
   }));
 };
+
+export const onAddTemplate = (nodeConnection: ConnectionProviderProps, title: string, template: string) => {
+  if (title === 'Slack') {
+    onAddTemplateSlack(nodeConnection, template);
+  } else if (title === 'Discord') {
+    onAddTemplateDiscord(nodeConnection, template);
+  }
+};
