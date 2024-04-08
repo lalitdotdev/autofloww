@@ -1,6 +1,13 @@
 "use client"
 
 import {
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
+} from '@/components/ui/accordion'
+import { CONNECTIONS, EditorCanvasDefaultCardTypes } from '@/lib/constant'
+import {
     Card,
     CardDescription,
     CardHeader,
@@ -9,9 +16,9 @@ import {
 import { EditorCanvasTypes, EditorNodeType } from '@/lib/types'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
-import { EditorCanvasDefaultCardTypes } from '@/lib/constant'
 import EditorCanvasIconHelper from './editor-canvas-card-icon-helper'
 import React from 'react'
+import RenderConnectionAccordion from './render-connect-accordion'
 import { Separator } from '@/components/ui/separator'
 import { onDragStart } from '@/lib/editor-utils'
 import { useEditor } from '@/providers/editor-provider'
@@ -52,8 +59,8 @@ const EditorCanvasSidebar = ({ nodes }: Props) => {
                                 draggable
                                 className="w-full cursor-grab border-black bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-900"
                                 onDragStart={(event) =>
-                                onDragStart(event, cardKey as EditorCanvasTypes)
-                            }
+                                    onDragStart(event, cardKey as EditorCanvasTypes)
+                                }
                             >
                                 <CardHeader className="flex flex-row items-center gap-4 p-4">
                                     <EditorCanvasIconHelper type={cardKey as EditorCanvasTypes} />
@@ -65,6 +72,37 @@ const EditorCanvasSidebar = ({ nodes }: Props) => {
                             </Card>
                         ))}
                 </TabsContent>
+
+                {/* Tab Content for settings */}
+                <TabsContent
+                    value="settings"
+                    className="flex flex-col gap-4 p-2"
+                >
+                    <div className="px-2 py-4 text-center text-xl font-bold">
+                        {state.editor.selectedNode.data.title}
+                    </div>
+
+                    <Accordion type="multiple">
+                        <AccordionItem
+                            value="Options"
+                            className="border-y-[1px] px-2"
+                        >
+                            <AccordionTrigger className="!no-underline">
+                                Account
+                            </AccordionTrigger>
+                            <AccordionContent>
+                                {CONNECTIONS.map((connection) => (
+                                    <RenderConnectionAccordion
+                                        key={connection.title}
+                                        state={state}
+                                        connection={connection}
+                                    />
+                                ))}
+                            </AccordionContent>
+                        </AccordionItem>
+                    </Accordion>
+                </TabsContent>
+
             </Tabs>
         </aside>
     )
