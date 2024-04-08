@@ -14,3 +14,12 @@ export const onSlackContent = (nodeConnection: ConnectionProviderProps, event: R
   }));
 };
 
+export const onDiscordContent = (
+  nodeConnection: ConnectionProviderProps,
+  event: React.ChangeEvent<HTMLInputElement>,
+) => {
+  nodeConnection.setDiscordNode((prev: any) => ({
+    ...prev,
+    content: event.target.value,
+  }));
+};
