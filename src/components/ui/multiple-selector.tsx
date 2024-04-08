@@ -334,7 +334,19 @@ const MultipleSelector = React.forwardRef<
             () => removePickedOption(options, selected),
             [options, selected]
         )
+        const commandFilter = React.useCallback(() => {
+            if (commandProps?.filter) {
+                return commandProps.filter
+            }
 
+            if (creatable) {
+                return (value: string, search: string) => {
+                    return value.toLowerCase().includes(search.toLowerCase()) ? 1 : -1
+                }
+            }
+            // Using default filter in `cmdk`. We don't have to provide it.
+            return undefined
+        }, [creatable, commandProps?.filter])
         return (
             <div>
                 Multiple selector
