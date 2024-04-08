@@ -33,3 +33,17 @@ export const onNotionContent = (
     content: event.target.value,
   }));
 };
+
+export const onContentChange = (
+  nodeConnection: ConnectionProviderProps,
+  nodeType: string,
+  event: React.ChangeEvent<HTMLInputElement>,
+) => {
+  if (nodeType === 'Slack') {
+    onSlackContent(nodeConnection, event);
+  } else if (nodeType === 'Discord') {
+    onDiscordContent(nodeConnection, event);
+  } else if (nodeType === 'Notion') {
+    onNotionContent(nodeConnection, event);
+  }
+};
