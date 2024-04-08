@@ -312,6 +312,24 @@ const MultipleSelector = React.forwardRef<
             return undefined
         }
 
+        const EmptyItem = React.useCallback(() => {
+            if (!emptyIndicator) return undefined
+
+            // For async search that showing emptyIndicator
+            if (onSearch && !creatable && Object.keys(options).length === 0) {
+                return (
+                    <CommandItem
+                        value="-"
+                        disabled
+                    >
+                        {emptyIndicator}
+                    </CommandItem>
+                )
+            }
+
+            return <CommandEmpty>{emptyIndicator}</CommandEmpty>
+        }, [creatable, emptyIndicator, onSearch, options])
+
 
 
         return (
