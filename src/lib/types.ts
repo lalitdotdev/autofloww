@@ -33,7 +33,7 @@ export type EditorCanvasTypes =
   | 'Google Calendar'
   | 'Trigger'
   | 'Action'
-  | 'Wait'
+  | 'Wait';
 
 export type EditorCanvasCardType = {
   title: string;
@@ -82,3 +82,10 @@ export type EditorActions =
         element: EditorNode;
       };
     };
+
+export const nodeMapper: Record<string, string> = {
+  Notion: 'notionNode',
+  Slack: 'slackNode',
+  Discord: 'discordNode',
+  'Google Drive': 'googleNode',
+};
