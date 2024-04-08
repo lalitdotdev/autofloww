@@ -54,3 +54,10 @@ export const onAddTemplateSlack = (nodeConnection: ConnectionProviderProps, temp
     content: `${prev.content} ${template}`,
   }));
 };
+
+export const onAddTemplateDiscord = (nodeConnection: ConnectionProviderProps, template: string) => {
+  nodeConnection.setDiscordNode((prev: any) => ({
+    ...prev,
+    content: `${prev.content} ${template}`,
+  }));
+};
