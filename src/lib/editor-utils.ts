@@ -47,3 +47,10 @@ export const onContentChange = (
     onNotionContent(nodeConnection, event);
   }
 };
+
+export const onAddTemplateSlack = (nodeConnection: ConnectionProviderProps, template: string) => {
+  nodeConnection.setSlackNode((prev: any) => ({
+    ...prev,
+    content: `${prev.content} ${template}`,
+  }));
+};
