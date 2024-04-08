@@ -18,7 +18,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 import EditorCanvasIconHelper from './editor-canvas-card-icon-helper'
 import React from 'react'
-import RenderConnectionAccordion from './render-connect-accordion'
+import RenderConnectionAccordion from './render-connection-accordion'
+import RenderOutputAccordion from './render-output-accordion'
 import { Separator } from '@/components/ui/separator'
 import { onDragStart } from '@/lib/editor-utils'
 import { useEditor } from '@/providers/editor-provider'
@@ -99,6 +100,18 @@ const EditorCanvasSidebar = ({ nodes }: Props) => {
                                     />
                                 ))}
                             </AccordionContent>
+                        </AccordionItem>
+                        <AccordionItem
+                            value="Expected Output"
+                            className="px-2"
+                        >
+                            <AccordionTrigger className="!no-underline">
+                                Action
+                            </AccordionTrigger>
+                            <RenderOutputAccordion
+                                state={state}
+                                nodeConnection={nodeConnection}
+                            />
                         </AccordionItem>
                     </Accordion>
                 </TabsContent>
