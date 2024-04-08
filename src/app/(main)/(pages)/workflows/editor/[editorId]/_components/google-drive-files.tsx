@@ -27,6 +27,7 @@ const GoogleDriveFiles = (props: Props) => {
         }
         setIsListening(false)
     }
+
     const onListener = async () => {
         const listener = await getGoogleListener()
         if (listener?.googleResourceId !== null) {
@@ -34,6 +35,9 @@ const GoogleDriveFiles = (props: Props) => {
         }
     }
 
+    useEffect(() => {
+        onListener()
+    }, [])
 
     return (
         <div className="flex flex-col gap-3 pb-6">
