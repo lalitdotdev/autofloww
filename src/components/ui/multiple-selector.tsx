@@ -252,6 +252,31 @@ const MultipleSelector = React.forwardRef<
 
 
 
+        useEffect(() => {
+            const doSearch = async () => {
+                setIsLoading(true)
+                const res = await onSearch?.(debouncedSearchTerm)
+                setOptions(transToGroupOption(res || [], groupBy))
+                setIsLoading(false)
+            }
+
+            const exec = async () => {
+                if (!onSearch || !open) return
+
+                if (triggerSearchOnFocus) {
+                    await doSearch()
+                }
+
+                if (debouncedSearchTerm) {
+                    await doSearch()
+                }
+            }
+
+            void exec()
+        }, [debouncedSearchTerm, open])
+
+
+
         return (
             <div>
                 Multiple selector
