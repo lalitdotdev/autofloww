@@ -348,9 +348,70 @@ const MultipleSelector = React.forwardRef<
             return undefined
         }, [creatable, commandProps?.filter])
         return (
-            <div>
-                Multiple selector
-            </div>
+            <Command
+                {...commandProps}
+                onKeyDown={(e) => {
+                    handleKeyDown(e)
+                    commandProps?.onKeyDown?.(e)
+                }}
+                className={cn(
+                    'overflow-visible bg-transparent',
+                    commandProps?.className
+                )}
+                shouldFilter={
+                    commandProps?.shouldFilter !== undefined
+                        ? commandProps.shouldFilter
+                        : !onSearch
+                } // When onSearch is provided, we don't want to filter the options. You can still override it.
+                filter={commandFilter()}
+            >
+                <div
+                    className={cn(
+                        'group rounded-md border border-input px-3 py-2 text-sm ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2',
+                        className
+                    )}
+                >
+                    <div className="flex flex-wrap gap-1">
+                        {selected.map((option) => {
+                            return (
+                                <Badge
+                                    key={option.value}
+                                    className={cn(
+                                        'data-[disabled]:bg-muted-foreground data-[disabled]:text-muted data-[disabled]:hover:bg-muted-foreground',
+                                        'data-[fixed]:bg-muted-foreground data-[fixed]:text-muted data-[fixed]:hover:bg-muted-foreground',
+                                        badgeClassName
+                                    )}
+                                    data-fixed={option.fixed}
+                                    data-disabled={disabled}
+                                >
+                                    {option.label}
+                                    <button
+                                        className={cn(
+                                            'ml-1 rounded-full outline-none ring-offset-background focus:ring-2 focus:ring-ring focus:ring-offset-2',
+                                            (disabled || option.fixed) && 'hidden'
+                                        )}
+                                        onKeyDown={(e) => {
+                                            if (e.key === 'Enter') {
+                                                handleUnselect(option)
+                                            }
+                                        }}
+                                        onMouseDown={(e) => {
+                                            e.preventDefault()
+                                            e.stopPropagation()
+                                        }}
+                                        onClick={() => handleUnselect(option)}
+                                    >
+                                        <X className="h-3 w-3 text-muted-foreground hover:text-foreground" />
+                                    </button>
+                                </Badge>
+                            )
+                        })}
+
+
+                    </div>
+                </div>
+
+            </Command>
         )
     }
 )
