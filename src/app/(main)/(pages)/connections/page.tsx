@@ -65,6 +65,16 @@ const Connections = async (props: Props) => {
             guild_id!
         )
 
+
+        await onNotionConnect(
+            access_token!,
+            workspace_id!,
+            workspace_icon!,
+            workspace_name!,
+            database_id!,
+            user.id
+        )
+
         const connections: any = {}
 
         const user_info = await getUserData(user.id)
