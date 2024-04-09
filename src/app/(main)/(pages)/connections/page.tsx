@@ -2,6 +2,9 @@ import { CONNECTIONS } from '@/lib/constant'
 import ConnectionCard from './_components/connection-card'
 import React from 'react'
 import { currentUser } from '@clerk/nextjs'
+import { getUserData } from './_actions/get-user'
+import { onDiscordConnect } from './_actions/discord-connection'
+import { onNotionConnect } from './_actions/notion-connection'
 
 type Props = {
     searchParams?: { [key: string]: string | undefined }
@@ -50,7 +53,34 @@ const Connections = async (props: Props) => {
 
     const user = await currentUser()
     if (!user) return null
+    const onUserConnections = async () => {
+        console.log(database_id)
+        await onDiscordConnect(
+            channel_id!,
+            webhook_id!,
+            webhook_name!,
+            webhook_url!,
+            user.id,
+            guild_name!,
+            guild_id!
+        )
 
+        const connections: any = {}
+
+        const user_info = await getUserData(user.id)
+
+        //get user info with all connections
+        user_info?.connections.map((connection) => {
+            connections[connection.type] = true
+            return (connections[connection.type] = true)
+        })
+
+        // Google Drive connection will always be true
+        // as it is given access during the login process
+        return { ...connections, 'Google Drive': true }
+    }
+
+    const connections = await onUserConnections()
 
     return (
         <div className="relative flex flex-col gap-4">
