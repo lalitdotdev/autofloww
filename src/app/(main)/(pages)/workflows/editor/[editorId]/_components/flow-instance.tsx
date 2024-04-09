@@ -19,6 +19,17 @@ const FlowInstance = ({ children, edges, nodes }: Props) => {
     const [isFlow, setIsFlow] = useState([])
     const { nodeConnection } = useNodeConnections()
 
+    const onFlowAutomation = useCallback(async () => {
+        const flow = await onCreateNodesEdges(
+            pathname.split('/').pop()!,
+            JSON.stringify(nodes),
+            JSON.stringify(edges),
+            JSON.stringify(isFlow)
+        )
+
+        if (flow) toast.message(flow.message)
+    }, [nodeConnection])
+
     return (
         <div className="flex flex-col gap-2">
             <div className="flex gap-3 p-4">
