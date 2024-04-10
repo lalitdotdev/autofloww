@@ -1,5 +1,7 @@
 import { ConnectionProviderProps } from '@/providers/connections-provider';
 import { EditorCanvasCardType } from './types';
+import { EditorState } from '@/providers/editor-provider';
+import { getDiscordConnectionUrl } from '@/app/(main)/(pages)/connections/_actions/discord-connection';
 
 // Setting the data in the event dataTransfer object to the nodeType and setting the effectAllowed to move the node around the canvas so that it can be dragged and dropped to the canvas from the sidebar area of the editor canvas sidebar component.
 export const onDragStart = (event: any, nodeType: EditorCanvasCardType['type']) => {
@@ -67,5 +69,23 @@ export const onAddTemplate = (nodeConnection: ConnectionProviderProps, title: st
     onAddTemplateSlack(nodeConnection, template);
   } else if (title === 'Discord') {
     onAddTemplateDiscord(nodeConnection, template);
+  }
+};
+
+export const onConnections = async (
+  nodeConnection: ConnectionProviderProps,
+  googleFile: any,
+  editorState: EditorState,
+) => {
+  if (editorState.editor.selectedNode.data.title == 'Discord') {
+    const connection = await getDiscordConnectionUrl();
+    if (connection) {
+      nodeConnection.setDiscordNode({
+        webhookURL: connection.url,
+        content: '',
+        webhookName: connection.name,
+        guildName: connection.guildName,
+      });
+    }
   }
 };
