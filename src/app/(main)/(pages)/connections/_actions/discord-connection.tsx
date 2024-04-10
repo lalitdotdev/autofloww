@@ -90,3 +90,22 @@ export const onDiscordConnect = async (
         }
     }
 }
+
+
+export const getDiscordConnectionUrl = async () => {
+    const user = await currentUser()
+    if (user) {
+        const webhook = await db.discordWebhook.findFirst({
+            where: {
+                userId: user.id,
+            },
+            select: {
+                url: true,
+                name: true,
+                guildName: true,
+            },
+        })
+
+        return webhook
+    }
+}
