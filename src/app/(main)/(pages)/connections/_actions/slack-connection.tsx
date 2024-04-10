@@ -79,3 +79,27 @@ export async function listBotChannels(
         throw error
     }
 }
+const postMessageInSlackChannel = async (
+    slackAccessToken: string,
+    slackChannel: string,
+    content: string
+): Promise<void> => {
+    try {
+        await axios.post(
+            'https://slack.com/api/chat.postMessage',
+            { channel: slackChannel, text: content },
+            {
+                headers: {
+                    Authorization: `Bearer ${slackAccessToken}`,
+                    'Content-Type': 'application/json;charset=utf-8',
+                },
+            }
+        )
+        console.log(`Message posted successfully to channel ID: ${slackChannel}`)
+    } catch (error: any) {
+        console.error(
+            `Error posting message to Slack channel ${slackChannel}:`,
+            error?.response?.data || error.message
+        )
+    }
+}
