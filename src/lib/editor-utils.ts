@@ -1,3 +1,5 @@
+import { getNotionConnection, getNotionDatabase } from '@/app/(main)/(pages)/connections/_actions/notion-connection';
+
 import { ConnectionProviderProps } from '@/providers/connections-provider';
 import { EditorCanvasCardType } from './types';
 import { EditorState } from '@/providers/editor-provider';
@@ -86,6 +88,28 @@ export const onConnections = async (
         webhookName: connection.name,
         guildName: connection.guildName,
       });
+    }
+  }
+  if (editorState.editor.selectedNode.data.title == 'Notion') {
+    const connection = await getNotionConnection();
+    if (connection) {
+      nodeConnection.setNotionNode({
+        accessToken: connection.accessToken,
+        databaseId: connection.databaseId,
+        workspaceName: connection.workspaceName,
+        content: {
+          name: googleFile.name,
+          kind: googleFile.kind,
+          type: googleFile.mimeType,
+        },
+      });
+
+      if (nodeConnection.notionNode.databaseId !== '') {
+        const response = await getNotionDatabase(
+          nodeConnection.notionNode.databaseId,
+          nodeConnection.notionNode.accessToken,
+        );
+      }
     }
   }
 };
