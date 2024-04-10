@@ -4,6 +4,7 @@ import { ConnectionProviderProps } from '@/providers/connections-provider';
 import { EditorCanvasCardType } from './types';
 import { EditorState } from '@/providers/editor-provider';
 import { getDiscordConnectionUrl } from '@/app/(main)/(pages)/connections/_actions/discord-connection';
+import { getSlackConnection } from '@/app/(main)/(pages)/connections/_actions/slack-connection';
 
 // Setting the data in the event dataTransfer object to the nodeType and setting the effectAllowed to move the node around the canvas so that it can be dragged and dropped to the canvas from the sidebar area of the editor canvas sidebar component.
 export const onDragStart = (event: any, nodeType: EditorCanvasCardType['type']) => {
@@ -110,6 +111,22 @@ export const onConnections = async (
           nodeConnection.notionNode.accessToken,
         );
       }
+    }
+  }
+  if (editorState.editor.selectedNode.data.title == 'Slack') {
+    const connection = await getSlackConnection();
+    if (connection) {
+      nodeConnection.setSlackNode({
+        appId: connection.appId,
+        authedUserId: connection.authedUserId,
+        authedUserToken: connection.authedUserToken,
+        slackAccessToken: connection.slackAccessToken,
+        botUserId: connection.botUserId,
+        teamId: connection.teamId,
+        teamName: connection.teamName,
+        userId: connection.userId,
+        content: '',
+      });
     }
   }
 };
