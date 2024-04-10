@@ -1,10 +1,11 @@
 import { getNotionConnection, getNotionDatabase } from '@/app/(main)/(pages)/connections/_actions/notion-connection';
+import { getSlackConnection, listBotChannels } from '@/app/(main)/(pages)/connections/_actions/slack-connection';
 
 import { ConnectionProviderProps } from '@/providers/connections-provider';
 import { EditorCanvasCardType } from './types';
 import { EditorState } from '@/providers/editor-provider';
+import { Option } from '@/components/ui/multiple-selector';
 import { getDiscordConnectionUrl } from '@/app/(main)/(pages)/connections/_actions/discord-connection';
-import { getSlackConnection } from '@/app/(main)/(pages)/connections/_actions/slack-connection';
 
 // Setting the data in the event dataTransfer object to the nodeType and setting the effectAllowed to move the node around the canvas so that it can be dragged and dropped to the canvas from the sidebar area of the editor canvas sidebar component.
 export const onDragStart = (event: any, nodeType: EditorCanvasCardType['type']) => {
@@ -129,4 +130,9 @@ export const onConnections = async (
       });
     }
   }
+};
+
+// fetch the slack channels for the bot user and set the slack channels in the state of the slack node connection
+export const fetchBotSlackChannels = async (token: string, setSlackChannels: (slackChannels: Option[]) => void) => {
+  await listBotChannels(token)?.then((channels) => setSlackChannels(channels));
 };
