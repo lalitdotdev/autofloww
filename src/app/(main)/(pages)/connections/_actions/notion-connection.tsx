@@ -63,3 +63,13 @@ export const getNotionConnection = async () => {
     }
 }
 
+export const getNotionDatabase = async (
+    databaseId: string,
+    accessToken: string
+) => {
+    const notion = new Client({
+        auth: accessToken,
+    })
+    const response = await notion.databases.retrieve({ database_id: databaseId })
+    return response
+}
