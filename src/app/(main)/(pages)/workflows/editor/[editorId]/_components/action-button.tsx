@@ -38,6 +38,7 @@ const ActionButton = ({
             }))
         }
     }, [nodeConnection.discordNode])
+
     const onStoreNotionContent = useCallback(async () => {
         console.log(
             nodeConnection.notionNode.databaseId,
@@ -57,6 +58,23 @@ const ActionButton = ({
         }
     }, [nodeConnection.notionNode])
 
+    const onStoreSlackContent = useCallback(async () => {
+        const response = await postMessageToSlack(
+            nodeConnection.slackNode.slackAccessToken,
+            channels!,
+            nodeConnection.slackNode.content
+        )
+        if (response.message == 'Success') {
+            toast.success('Message sent successfully')
+            nodeConnection.setSlackNode((prev: any) => ({
+                ...prev,
+                content: '',
+            }))
+            setChannels!([])
+        } else {
+            toast.error(response.message)
+        }
+    }, [nodeConnection.slackNode, channels])
 
 
 
