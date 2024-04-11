@@ -77,13 +77,40 @@ const ActionButton = ({
     }, [nodeConnection.slackNode, channels])
 
 
+    const onCreateLocalNodeTempate = useCallback(async () => {
+        if (currentService === 'Discord') {
+            const response = await onCreateNodeTemplate(
+                nodeConnection.discordNode.content,
+                currentService,
+                pathname.split('/').pop()!
+            )
 
-    return (
-        <div>
-            Action Button
-        </div>
-    )
+            if (response) {
+                toast.message(response)
+            }
+        }
+        if (currentService === 'Slack') {
+            const response = await onCreateNodeTemplate(
+                nodeConnection.slackNode.content,
+                currentService,
+                pathname.split('/').pop()!,
+                channels,
+                nodeConnection.slackNode.slackAccessToken
+            )
 
-}
+            if (response) {
+                toast.message(response)
+            }
+        }
+
+
+
+        return (
+            <div>
+                Action Button
+            </div>
+        )
+
+    }
 
 export default ActionButton
