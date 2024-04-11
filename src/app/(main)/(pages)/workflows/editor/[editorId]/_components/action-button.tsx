@@ -134,7 +134,7 @@ const ActionButton = ({
                             Test Message
                         </Button>
                         <Button
-                            onClick={onCreateLocalNodeTempate}
+                            onClick={onCreateLocalNodeTemplate}
                             variant="outline"
                         >
                             Save Template
@@ -152,7 +152,7 @@ const ActionButton = ({
                             Test
                         </Button>
                         <Button
-                            onClick={onCreateLocalNodeTempate}
+                            onClick={onCreateLocalNodeTemplate}
                             variant="outline"
                         >
                             Save Template
