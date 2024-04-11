@@ -122,12 +122,67 @@ const ActionButton = ({
 
 
 
-    return (
-        <div>
-            Action Button
-        </div>
-    )
+    const renderActionButton = () => {
+        switch (currentService) {
+            case 'Discord':
+                return (
+                    <>
+                        <Button
+                            variant="outline"
+                            onClick={onSendDiscordMessage}
+                        >
+                            Test Message
+                        </Button>
+                        <Button
+                            onClick={onCreateLocalNodeTempate}
+                            variant="outline"
+                        >
+                            Save Template
+                        </Button>
+                    </>
+                )
 
+            case 'Notion':
+                return (
+                    <>
+                        <Button
+                            variant="outline"
+                            onClick={onStoreNotionContent}
+                        >
+                            Test
+                        </Button>
+                        <Button
+                            onClick={onCreateLocalNodeTempate}
+                            variant="outline"
+                        >
+                            Save Template
+                        </Button>
+                    </>
+                )
+
+            case 'Slack':
+                return (
+                    <>
+                        <Button
+                            variant="outline"
+                            onClick={onStoreSlackContent}
+                        >
+                            Send Message
+                        </Button>
+                        <Button
+                            onClick={onCreateLocalNodeTempate}
+                            variant="outline"
+                        >
+                            Save Template
+                        </Button>
+                    </>
+                )
+
+            default:
+                return null
+        }
+    }
+    return renderActionButton()
 }
 
 export default ActionButton
