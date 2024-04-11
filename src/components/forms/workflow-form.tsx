@@ -34,6 +34,7 @@ type Props = {
 
 const Workflowform = ({ subTitle, title }: Props) => {
 
+    const { setClose } = useModal()
     const form = useForm<z.infer<typeof WorkflowFormSchema>>({
         mode: 'onChange',
         resolver: zodResolver(WorkflowFormSchema),
@@ -52,7 +53,7 @@ const Workflowform = ({ subTitle, title }: Props) => {
             toast.message(workflow.message)
             router.refresh()
         }
-      
+        setClose()
     }
 
     return (
