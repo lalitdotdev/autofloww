@@ -38,7 +38,24 @@ const ActionButton = ({
             }))
         }
     }, [nodeConnection.discordNode])
-
+    const onStoreNotionContent = useCallback(async () => {
+        console.log(
+            nodeConnection.notionNode.databaseId,
+            nodeConnection.notionNode.accessToken,
+            nodeConnection.notionNode.content
+        )
+        const response = await onCreateNewPageInDatabase(
+            nodeConnection.notionNode.databaseId,
+            nodeConnection.notionNode.accessToken,
+            nodeConnection.notionNode.content
+        )
+        if (response) {
+            nodeConnection.setNotionNode((prev: any) => ({
+                ...prev,
+                content: '',
+            }))
+        }
+    }, [nodeConnection.notionNode])
 
 
 
