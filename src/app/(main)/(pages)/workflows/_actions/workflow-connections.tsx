@@ -35,8 +35,6 @@ export const onFlowPublish = async (workflowId: string, state: boolean) => {
     if (published.publish) return 'Workflow published'
     return 'Workflow unpublished'
 }
-
-
 export const onCreateNodeTemplate = async (
     content: string,
     type: string,
@@ -134,5 +132,24 @@ export const onCreateNodeTemplate = async (
         })
 
         if (response) return 'Notion template saved'
+    }
+}
+
+
+export const onCreateWorkflow = async (name: string, description: string) => {
+    const user = await currentUser()
+
+    if (user) {
+        //create new workflow
+        const workflow = await db.workflows.create({
+            data: {
+                userId: user.id,
+                name,
+                description,
+            },
+        })
+
+        if (workflow) return { message: 'workflow created' }
+        return { message: 'Oops! try again' }
     }
 }
