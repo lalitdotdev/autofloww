@@ -1,6 +1,14 @@
+import React, { useCallback } from 'react'
+
+import { Button } from '@/components/ui/button'
 import { ConnectionProviderProps } from '@/providers/connections-provider'
 import { Option } from './content-based-on-title'
-import React from 'react'
+import { onCreateNewPageInDatabase } from '@/app/(main)/(pages)/connections/_actions/notion-connection'
+import { onCreateNodeTemplate } from '../../../_actions/workflow-connections'
+import { postContentToWebHook } from '@/app/(main)/(pages)/connections/_actions/discord-connection'
+import { postMessageToSlack } from '@/app/(main)/(pages)/connections/_actions/slack-connection'
+import { toast } from 'sonner'
+import { usePathname } from 'next/navigation'
 
 type Props = {
     currentService: string
@@ -16,9 +24,31 @@ const ActionButton = ({
     setChannels,
 
 }: Props) => {
+    const pathname = usePathname();
+    const onSendDiscordMessage = useCallback(async () => {
+        const response = await postContentToWebHook(
+            nodeConnection.discordNode.content,
+            nodeConnection.discordNode.webhookURL
+        )
+
+        if (response.message == 'success') {
+            nodeConnection.setDiscordNode((prev: any) => ({
+                ...prev,
+                content: '',
+            }))
+        }
+    }, [nodeConnection.discordNode])
+
+
+
+
+
     return (
-        <div>ActionButton</div>
+        <div>
+            Action Button
+        </div>
     )
+
 }
 
 export default ActionButton
