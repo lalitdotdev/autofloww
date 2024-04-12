@@ -24,5 +24,18 @@ export async function GET() {
     access_token: accessToken,
   });
 
+  const drive = google.drive({
+    version: 'v3',
+    auth: oauth2Client,
+  });
+
+  const channelId = uuidv4();
+
+  const startPageTokenRes = await drive.changes.getStartPageToken({});
+  const startPageToken = startPageTokenRes.data.startPageToken;
+  if (startPageToken == null) {
+    throw new Error('startPageToken is unexpectedly null');
+  }
+
   return new NextResponse('Oops! something went wrong, try again');
 }
