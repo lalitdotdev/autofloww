@@ -37,5 +37,17 @@ export async function GET() {
     throw new Error('startPageToken is unexpectedly null');
   }
 
+  const listener = await drive.changes.watch({
+    pageToken: startPageToken,
+    supportsAllDrives: true,
+    supportsTeamDrives: true,
+    requestBody: {
+      id: channelId,
+      type: 'web_hook',
+      address: `${process.env.NGROK_URI}/api/drive-activity/notification`,
+      kind: 'api#channel',
+    },
+  });
+
   return new NextResponse('Oops! something went wrong, try again');
 }
