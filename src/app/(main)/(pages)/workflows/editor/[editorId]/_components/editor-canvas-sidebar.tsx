@@ -44,7 +44,7 @@ const EditorCanvasSidebar = ({ nodes }: Props) => {
             onConnections(nodeConnection, googleFile, state)
         }
 
-    }, [googleFile, nodeConnection, state])
+    }, [state])
 
     useEffect(() => {
 

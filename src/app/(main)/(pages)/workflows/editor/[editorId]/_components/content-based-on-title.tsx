@@ -40,6 +40,8 @@ type Props = {
     setSelectedSlackChannels: (value: Option[]) => void
 }
 
+// todo : fix the component rerendering issue on typing in the input field
+
 const ContentBasedOnTitle = ({
     nodeConnection,
     newState,
@@ -89,6 +91,7 @@ const ContentBasedOnTitle = ({
                         type="text"
                         value={nodeConnectionType.content}
                         onChange={(event) => onContentChange(nodeConnection, title, event)}
+                        placeholder={`Enter your message to send to ${title}`}
                     />
 
                     {JSON.stringify(file) !== '{}' && title !== 'Google Drive' && (
