@@ -49,5 +49,21 @@ export async function GET() {
     },
   });
 
+  if (listener.status == 200) {
+    //if listener created store its channel id in db
+    const channelStored = await db.user.updateMany({
+      where: {
+        clerkId: userId,
+      },
+      data: {
+        googleResourceId: listener.data.resourceId,
+      },
+    });
+
+    if (channelStored) {
+      return new NextResponse('Listening to changes...');
+    }
+  }
+
   return new NextResponse('Oops! something went wrong, try again');
 }
