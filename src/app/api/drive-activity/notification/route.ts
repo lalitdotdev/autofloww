@@ -93,7 +93,18 @@ export async function POST(req: NextRequest) {
                   },
                 },
               );
-
+              if (res) {
+                flowPath.splice(flowPath[current], 1);
+                const cronPath = await db.workflows.update({
+                  where: {
+                    id: flow.id,
+                  },
+                  data: {
+                    cronPath: JSON.stringify(flowPath),
+                  },
+                });
+                if (cronPath) break;
+              }
               break;
             }
             current++;
