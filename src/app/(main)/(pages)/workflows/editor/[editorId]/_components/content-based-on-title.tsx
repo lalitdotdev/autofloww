@@ -14,6 +14,7 @@ import { EditorState } from '@/providers/editor-provider'
 import GoogleDriveFiles from './google-drive-files'
 import GoogleFileDetails from './google-file-details'
 import { Input } from '@/components/ui/input'
+import axios from 'axios'
 import { nodeMapper } from '@/lib/types'
 import { onContentChange } from '@/lib/editor-utils'
 import { toast } from 'sonner'
@@ -40,7 +41,7 @@ type Props = {
     setSelectedSlackChannels: (value: Option[]) => void
 }
 
-// todo : fix the component rerendering issue on typing in the input field
+
 
 const ContentBasedOnTitle = ({
     nodeConnection,
@@ -53,6 +54,21 @@ const ContentBasedOnTitle = ({
     const { selectedNode } = newState.editor
     const title = selectedNode.data.title
 
+    useEffect(() => {
+        const reqGoogle = async () => {
+            const response: { data: { message: { files: any } } } = await axios.get(
+                '/api/drive'
+            )
+            if (response) {
+                console.log(response.data.message.files[0])
+                toast.message("Fetched File")
+                setFile(response.data.message.files[0])
+            } else {
+                toast.error('Something went wrong')
+            }
+        }
+        reqGoogle()
+    }, [])
 
 
     // @ts-ignore
