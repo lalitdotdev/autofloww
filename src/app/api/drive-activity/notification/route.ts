@@ -109,6 +109,14 @@ export async function POST(req: NextRequest) {
             }
             current++;
           }
+          await db.user.update({
+            where: {
+              clerkId: user.clerkId,
+            },
+            data: {
+              credits: `${parseInt(user.credits!) - 1}`,
+            },
+          });
         });
       }
     }
