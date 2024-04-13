@@ -118,16 +118,23 @@ export async function POST(req: NextRequest) {
             },
           });
         });
+        return Response.json(
+          {
+            message: 'flow completed',
+          },
+          {
+            status: 200,
+          },
+        );
       }
     }
-
-    return Response.json(
-      {
-        message: 'success',
-      },
-      {
-        status: 200,
-      },
-    );
   }
+  return Response.json(
+    {
+      message: 'success',
+    },
+    {
+      status: 200,
+    },
+  );
 }
