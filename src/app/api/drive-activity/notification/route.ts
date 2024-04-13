@@ -1,4 +1,5 @@
 import { NextRequest } from 'next/server';
+import axios from 'axios';
 import { db } from '@/lib/db';
 import { headers } from 'next/headers';
 import { onCreateNewPageInDatabase } from '@/app/(main)/(pages)/connections/_actions/notion-connection';
@@ -66,6 +67,36 @@ export async function POST(req: NextRequest) {
               );
               flowPath.splice(flowPath[current], 1);
             }
+
+            if (flowPath[current] == 'Wait') {
+              const res = await axios.put(
+                'https://api.cron-job.org/jobs',
+                {
+                  job: {
+                    url: `${process.env.NGROK_URI}?flow_id=${flow.id}`,
+                    enabled: 'true',
+                    schedule: {
+                      timezone: 'Europe/Istanbul',
+                      expiresAt: 0,
+                      hours: [-1],
+                      mdays: [-1],
+                      minutes: ['*****'],
+                      months: [-1],
+                      wdays: [-1],
+                    },
+                  },
+                },
+                {
+                  headers: {
+                    Authorization: `Bearer ${process.env.CRON_JOB_KEY!}`,
+                    'Content-Type': 'application/json',
+                  },
+                },
+              );
+
+              break;
+            }
+            current++;
           }
         });
       }
