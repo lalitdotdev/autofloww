@@ -2,6 +2,7 @@ import { NextRequest } from 'next/server';
 import { db } from '@/lib/db';
 import { headers } from 'next/headers';
 import { postContentToWebHook } from '@/app/(main)/(pages)/connections/_actions/discord-connection';
+import { postMessageToSlack } from '@/app/(main)/(pages)/connections/_actions/slack-connection';
 
 export async function POST(req: NextRequest) {
   console.log('🔴 Changed');
@@ -45,6 +46,16 @@ export async function POST(req: NextRequest) {
                 await postContentToWebHook(flow.discordTemplate!, discordMessage.url);
                 flowPath.splice(flowPath[current], 1);
               }
+            }
+            if (flowPath[current] == 'Slack') {
+              const channels = flow.slackChannels.map((channel) => {
+                return {
+                  label: '',
+                  value: channel,
+                };
+              });
+              await postMessageToSlack(flow.slackAccessToken!, channels, flow.slackTemplate!);
+              flowPath.splice(flowPath[current], 1);
             }
           }
         });
