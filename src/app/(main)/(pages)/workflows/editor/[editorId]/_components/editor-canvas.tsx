@@ -6,6 +6,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import ReactFlow, {
     Background,
     Controls,
+    EdgeChange,
     MiniMap,
     NodeChange,
     ReactFlowInstance,
@@ -47,6 +48,14 @@ const EditorCanvas = (props: Props) => {
             setNodes((nds) => applyNodeChanges(changes, nds))
         },
         [setNodes]
+    )
+
+
+    const onEdgesChange = useCallback(
+        (changes: EdgeChange[]) =>
+            //@ts-ignore
+            setEdges((eds) => applyEdgeChanges(changes, eds)),
+        [setEdges]
     )
 
 
