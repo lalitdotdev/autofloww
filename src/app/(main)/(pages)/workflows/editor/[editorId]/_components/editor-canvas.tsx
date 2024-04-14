@@ -25,8 +25,10 @@ import EditorCanvasCardSingle from './editor-canvas-card-single'
 import { EditorCanvasDefaultCardTypes } from '@/lib/constant'
 import EditorCanvasSidebar from './editor-canvas-sidebar'
 import FlowInstance from './flow-instance'
+import { onGetNodesEdges } from '../../../_actions/workflow-connections'
 import { toast } from 'sonner'
 import { useEditor } from '@/providers/editor-provider'
+import { usePathname } from 'next/navigation'
 import { v4 } from 'uuid'
 
 type Props = {}
@@ -42,7 +44,7 @@ const EditorCanvas = (props: Props) => {
     const [isWorkFlowLoading, setIsWorkFlowLoading] = useState<boolean>(false)
     const [reactFlowInstance, setReactFlowInstance] =
         useState<ReactFlowInstance>()
-
+    const pathname = usePathname()
 
     const onDragOver = useCallback((event: any) => {
         event.preventDefault()
@@ -162,6 +164,20 @@ const EditorCanvas = (props: Props) => {
         []
     )
 
+    const onGetWorkFlow = async () => {
+        setIsWorkFlowLoading(true)
+        const response = await onGetNodesEdges(pathname.split('/').pop()!)
+        if (response) {
+            setEdges(JSON.parse(response.edges!))
+            setNodes(JSON.parse(response.nodes!))
+            setIsWorkFlowLoading(false)
+        }
+        setIsWorkFlowLoading(false)
+    }
+
+    useEffect(() => {
+        onGetWorkFlow()
+    }, [])
 
 
 
