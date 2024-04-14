@@ -7,6 +7,7 @@ import ReactFlow, {
     Background,
     Controls,
     MiniMap,
+    NodeChange,
     ReactFlowInstance,
 } from 'reactflow'
 import {
@@ -39,6 +40,15 @@ const EditorCanvas = (props: Props) => {
         event.preventDefault()
         event.dataTransfer.dropEffect = 'move'
     }, [])
+
+    const onNodesChange = useCallback(
+        (changes: NodeChange[]) => {
+            //@ts-ignore
+            setNodes((nds) => applyNodeChanges(changes, nds))
+        },
+        [setNodes]
+    )
+
 
 
 
