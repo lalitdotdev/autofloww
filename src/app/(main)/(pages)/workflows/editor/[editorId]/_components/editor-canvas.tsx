@@ -5,11 +5,14 @@ import 'reactflow/dist/style.css'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import ReactFlow, {
     Background,
+    Connection,
     Controls,
+    Edge,
     EdgeChange,
     MiniMap,
     NodeChange,
     ReactFlowInstance,
+    addEdge,
 } from 'reactflow'
 import {
     ResizableHandle,
@@ -58,6 +61,10 @@ const EditorCanvas = (props: Props) => {
         [setEdges]
     )
 
+    const onConnect = useCallback(
+        (params: Edge | Connection) => setEdges((eds) => addEdge(params, eds)),
+        []
+    )
 
 
 
