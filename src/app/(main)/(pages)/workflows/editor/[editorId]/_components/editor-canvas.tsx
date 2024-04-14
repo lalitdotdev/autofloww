@@ -21,6 +21,7 @@ import {
     ResizablePanelGroup,
 } from '@/components/ui/resizable'
 
+import EditorCanvasCardSingle from './editor-canvas-card-single'
 import { EditorCanvasDefaultCardTypes } from '@/lib/constant'
 import EditorCanvasSidebar from './editor-canvas-sidebar'
 import FlowInstance from './flow-instance'
@@ -143,6 +144,23 @@ const EditorCanvas = (props: Props) => {
         dispatch({ type: 'LOAD_DATA', payload: { edges, elements: nodes } })
     }, [nodes, edges])
 
+    const nodeTypes = useMemo(
+        () => ({
+            Action: EditorCanvasCardSingle,
+            Trigger: EditorCanvasCardSingle,
+            Email: EditorCanvasCardSingle,
+            Condition: EditorCanvasCardSingle,
+            AI: EditorCanvasCardSingle,
+            Slack: EditorCanvasCardSingle,
+            'Google Drive': EditorCanvasCardSingle,
+            Notion: EditorCanvasCardSingle,
+            Discord: EditorCanvasCardSingle,
+            'Custom Webhook': EditorCanvasCardSingle,
+            'Google Calendar': EditorCanvasCardSingle,
+            Wait: EditorCanvasCardSingle,
+        }),
+        []
+    )
 
 
 
