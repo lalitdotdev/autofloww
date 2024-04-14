@@ -118,6 +118,27 @@ const EditorCanvas = (props: Props) => {
         [reactFlowInstance, state]
     )
 
+    const handleClickCanvas = () => {
+        dispatch({
+            type: 'SELECTED_ELEMENT',
+            payload: {
+                element: {
+                    data: {
+                        completed: false,
+                        current: false,
+                        description: '',
+                        metadata: {},
+                        title: '',
+                        type: 'Trigger',
+                    },
+                    id: '',
+                    position: { x: 0, y: 0 },
+                    type: 'Trigger',
+                },
+            },
+        })
+    }
+
 
 
 
