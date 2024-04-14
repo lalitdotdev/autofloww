@@ -2,6 +2,7 @@
 
 import 'reactflow/dist/style.css'
 
+import { EditorCanvasCardType, EditorNodeType } from '@/lib/types'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import ReactFlow, {
     Background,
@@ -20,10 +21,12 @@ import {
     ResizablePanelGroup,
 } from '@/components/ui/resizable'
 
+import { EditorCanvasDefaultCardTypes } from '@/lib/constant'
 import EditorCanvasSidebar from './editor-canvas-sidebar'
-import { EditorNodeType } from '@/lib/types'
 import FlowInstance from './flow-instance'
+import { toast } from 'sonner'
 import { useEditor } from '@/providers/editor-provider'
+import { v4 } from 'uuid'
 
 type Props = {}
 
@@ -65,6 +68,59 @@ const EditorCanvas = (props: Props) => {
         (params: Edge | Connection) => setEdges((eds) => addEdge(params, eds)),
         []
     )
+    const onDrop = useCallback(
+        (event: any) => {
+            event.preventDefault()
+
+            const type: EditorCanvasCardType['type'] = event.dataTransfer.getData(
+                'application/reactflow'
+            )
+
+            // check if the dropped element is valid
+            if (typeof type === 'undefined' || !type) {
+                return
+            }
+
+            const triggerAlreadyExists = state.editor.elements.find(
+                (node) => node.type === 'Trigger'
+            )
+
+            if (type === 'Trigger' && triggerAlreadyExists) {
+                toast('Only one trigger can be added to automations at the moment')
+                return
+            }
+
+            // reactFlowInstance.project was renamed to reactFlowInstance.screenToFlowPosition
+            // and you don't need to subtract the reactFlowBounds.left/top anymore
+            // details: https://reactflow.dev/whats-new/2023-11-10
+            if (!reactFlowInstance) return
+            const position = reactFlowInstance.screenToFlowPosition({
+                x: event.clientX,
+                y: event.clientY,
+            })
+
+            const newNode = {
+                id: v4(),
+                type,
+                position,
+                data: {
+                    title: type,
+                    description: EditorCanvasDefaultCardTypes[type].description,
+                    completed: false,
+                    current: false,
+                    metadata: {},
+                    type: type,
+                },
+            }
+            //@ts-ignore
+            setNodes((nds) => nds.concat(newNode))
+        },
+        [reactFlowInstance, state]
+    )
+
+
+
+
 
 
 
@@ -115,3 +171,4 @@ const EditorCanvas = (props: Props) => {
 }
 
 export default EditorCanvas
+
