@@ -139,6 +139,9 @@ const EditorCanvas = (props: Props) => {
         })
     }
 
+    useEffect(() => {
+        dispatch({ type: 'LOAD_DATA', payload: { edges, elements: nodes } })
+    }, [nodes, edges])
 
 
 
