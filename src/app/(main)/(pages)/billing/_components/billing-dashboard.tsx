@@ -27,6 +27,20 @@ const BillingDashboard = (props: Props) => {
         onStripeProducts()
     }, [])
 
+    const onPayment = async (id: string) => {
+        const { data } = await axios.post(
+            '/api/payment',
+            {
+                priceId: id,
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+        )
+        window.location.assign(data)
+    }
 
     return (
         <>
@@ -53,7 +67,7 @@ const BillingDashboard = (props: Props) => {
                 <>
                     <div className="flex gap-5 p-6">
                         <SubscriptionCards
-                            onPayment={() => { }}
+                            onPayment={onPayment}
                             tier={tier}
                             products={stripeProducts}
                         />
