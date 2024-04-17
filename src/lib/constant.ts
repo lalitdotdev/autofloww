@@ -131,7 +131,7 @@ export const EditorCanvasDefaultCardTypes = {
     description: 'Create a calendar invite.',
     type: 'Action',
   },
-  'WhatsApp': {
+  WhatsApp: {
     description: 'Send a message to a user on WhatsApp.',
     type: 'Action',
   },
