@@ -8,7 +8,7 @@ type CreditTrackerProps = {
     tier: string
 }
 
-const CreditTracker = ({ credits, tier }: CreditTrackerProps) => {
+const CreditsTracker = ({ credits, tier }: CreditTrackerProps) => {
     return (
         <div className="p-6">
             <Card className="p-6">
@@ -36,4 +36,4 @@ const CreditTracker = ({ credits, tier }: CreditTrackerProps) => {
     )
 }
 
-export default CreditTracker
+export default CreditsTracker
