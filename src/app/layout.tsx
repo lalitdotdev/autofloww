@@ -1,16 +1,18 @@
 import "./globals.css";
 
+import { BillingProvider } from "@/providers/billing-provider";
 import { ClerkProvider } from '@clerk/nextjs'
 import { DM_Sans } from "next/font/google";
 import type { Metadata } from "next";
+import ModalProvider from "@/providers/modal-provider";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 
 const font = DM_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-    title: 'Flux.',
-    description: 'Automate Your Work With Flux.',
+    title: 'Floww — Automate Your Work With Floww.',
+    description: 'Automate Your Work With Floww.',
 }
 
 export default function RootLayout({
@@ -31,8 +33,12 @@ export default function RootLayout({
                         enableSystem
                         disableTransitionOnChange
                     >
-                        {children}
-                        <Toaster />
+                        <BillingProvider>
+                            <ModalProvider>
+                                {children}
+                                <Toaster />
+                            </ModalProvider>
+                        </BillingProvider>
                     </ThemeProvider>
                 </body>
             </html>
