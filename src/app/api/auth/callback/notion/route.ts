@@ -47,11 +47,11 @@ export async function GET(req: NextRequest) {
 
       //   Redirect the user to the connections page with the workspace details in the URL query string parameters
       return NextResponse.redirect(
-        `https://localhost:3000/connections?access_token=${response.data.access_token}&workspace_name=${response.data.workspace_name}&workspace_icon=${response.data.workspace_icon}&workspace_id=${response.data.workspace_id}&database_id=${databaseId}`,
+        `https://autofloww.vercel.app/connections?access_token=${response.data.access_token}&workspace_name=${response.data.workspace_name}&workspace_icon=${response.data.workspace_icon}&workspace_id=${response.data.workspace_id}&database_id=${databaseId}`,
       );
     }
   }
 
   // If the response from the Notion API does not contain the access token and workspace details, redirect the user to the connections page without the workspace details in the URL query string parameters
-  return NextResponse.redirect('https://localhost:3000/connections');
+  return NextResponse.redirect('https://autofloww.vercel.app/connections');
 }

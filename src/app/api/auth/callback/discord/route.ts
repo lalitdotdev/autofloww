@@ -10,7 +10,9 @@ export async function GET(req: NextRequest) {
     data.append('client_id', process.env.DISCORD_CLIENT_ID!); // Add the client ID to the data object (from the environment variable)
     data.append('client_secret', process.env.DISCORD_CLIENT_SECRET!); // Add the client secret to the data object (from the environment variable)
     data.append('grant_type', 'authorization_code'); // Add the grant type to the data object
-    data.append('redirect_uri', 'https://localhost:3000/api/auth/callback/discord'); // Add the redirect URI to the data object (the same as the one used to get the code)
+    // data.append('redirect_uri', 'https://localhost:3000/api/auth/callback/discord'); // Add the redirect URI to the data object (the same as the one used to get the code) -- development URL
+    data.append('redirect_uri', 'https://autofloww.vercel.app/api/auth/callback/discord'); // Add the redirect URI to the data object (the same as the one used to get the code) -- prod URL
+
     data.append('code', code.toString()); // Add the code to the data object
 
     // Send a POST request to the Discord API to get the access token and webhook details from the code provided in the URL query string parameter 'code' using the data object created above as the body of the request and the headers specified below (Content-Type: application/x-www-form-urlencoded)
@@ -33,12 +35,14 @@ export async function GET(req: NextRequest) {
       const UserGuild = UserGuilds.data.filter((guild: any) => guild.id == output.data.webhook.guild_id);
 
       //   Redirect the user to the connections page with the webhook details in the URL query string parameters
+      //   for production URL replace
+      //  https://localhost:3000/connections with https://autofloww.vercel.app/connections
       return NextResponse.redirect(
-        `https://localhost:3000/connections?webhook_id=${output.data.webhook.id}&webhook_url=${output.data.webhook.url}&webhook_name=${output.data.webhook.name}&guild_id=${output.data.webhook.guild_id}&guild_name=${UserGuild[0].name}&channel_id=${output.data.webhook.channel_id}`,
+        `https://autofloww.vercel.app/connections?webhook_id=${output.data.webhook.id}&webhook_url=${output.data.webhook.url}&webhook_name=${output.data.webhook.name}&guild_id=${output.data.webhook.guild_id}&guild_name=${UserGuild[0].name}&channel_id=${output.data.webhook.channel_id}`,
       );
     }
 
     // If the response from the Discord API does not contain the access token and webhook details, redirect the user to the connections page without the webhook details in the URL query string parameters
-    return NextResponse.redirect('https://localhost:3000/connections');
+    return NextResponse.redirect('https://autofloww.vercel.app/connections');
   }
 }
