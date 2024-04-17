@@ -14,8 +14,18 @@ const BillingDashboard = (props: Props) => {
     const [stripeProducts, setStripeProducts] = useState<any>([])
     const [loading, setLoading] = useState<boolean>(false)
 
+    const onStripeProducts = async () => {
+        setLoading(true)
+        const { data } = await axios.get('/api/payment')
+        if (data) {
+            setStripeProducts(data)
+            setLoading(false)
+        }
+    }
 
-
+    useEffect(() => {
+        onStripeProducts()
+    }, [])
 
 
     return (
