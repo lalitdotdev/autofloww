@@ -39,7 +39,7 @@ const FlowInstance = ({ children, edges, nodes }: Props) => {
         const flows: any = []
         const connectedEdges = edges.map((edge) => edge.target)
         connectedEdges.map((target) => {
-            nodes.map((node) => {
+            nodes.forEach((node) => {
                 if (node.id === target) {
                     flows.push(node.type)
                 }
@@ -59,14 +59,14 @@ const FlowInstance = ({ children, edges, nodes }: Props) => {
         <div className="flex flex-col gap-2">
             <div className="flex gap-3 p-4">
                 <Button
-                    // onClick={onFlowAutomation}
+                    onClick={onFlowAutomation}
                     disabled={isFlow.length < 1}
                 >
                     Save
                 </Button>
                 <Button
                     disabled={isFlow.length < 1}
-                // onClick={onPublishWorkflow}
+                    onClick={onPublishWorkflow}
                 >
                     Publish
                 </Button>

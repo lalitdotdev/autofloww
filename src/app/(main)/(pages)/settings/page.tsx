@@ -12,6 +12,7 @@ const Settings = async (props: Props) => {
     const authUser = await currentUser()
     if (!authUser) return null
 
+    // create a user object from the database using the clerkId of the authenticated user and the user object from the database
     const user = await db.user.findUnique({ where: { clerkId: authUser.id } })
     // todo: wire up profile picture
 

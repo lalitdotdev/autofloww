@@ -69,7 +69,6 @@ const RenderConnectionAccordion = ({
     const { slackChannels, selectedSlackChannels, setSelectedSlackChannels } =
         useFlowwStore()
 
-
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState('')
 
@@ -119,7 +118,6 @@ const RenderConnectionAccordion = ({
                 </>
             )}
         </AccordionContent>
-
     )
 }
 

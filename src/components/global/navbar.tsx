@@ -21,7 +21,7 @@ const Navbar = async (props: Props) => {
                     alt="fuzzie logo"
                     className="shadow-sm"
                 />
-                <p className="text-3xl font-bold">ux</p>
+                <p className="text-3xl font-bold">oww</p>
             </aside>
             <nav className="absolute left-[50%] top-[50%] transform translate-x-[-50%] translate-y-[-50%] hidden md:block">
                 <ul className="flex items-center gap-4 list-none">

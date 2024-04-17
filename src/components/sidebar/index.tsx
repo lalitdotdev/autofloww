@@ -26,10 +26,11 @@ const MenuOptions = (props: Props) => {
         <nav className=" dark:bg-black h-screen overflow-scroll  justify-between flex items-center flex-col  gap-10 py-6 px-2">
             <div className="flex items-center justify-center flex-col gap-8">
                 <Link
-                    className="flex font-bold flex-row "
+                    className="flex font-bold flex-row gap-2"
                     href="/"
                 >
                     <Image src="/fluxLogo.png" width={30} height={30} alt="" />
+                    <span className="text-md">floww.</span>
                 </Link>
                 <TooltipProvider>
                     {menuOptions.map((menuItem) => (

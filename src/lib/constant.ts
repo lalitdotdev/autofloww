@@ -112,6 +112,7 @@ export const EditorCanvasDefaultCardTypes = {
     description: 'Use the power of AI to summarize, respond, create and much more.',
     type: 'Action',
   },
+
   Slack: { description: 'Send a notification to slack', type: 'Action' },
   'Google Drive': {
     description: 'Connect with Google drive to trigger actions or to create files and folders.',
@@ -128,6 +129,10 @@ export const EditorCanvasDefaultCardTypes = {
   },
   'Google Calendar': {
     description: 'Create a calendar invite.',
+    type: 'Action',
+  },
+  'WhatsApp': {
+    description: 'Send a message to a user on WhatsApp.',
     type: 'Action',
   },
   Trigger: {

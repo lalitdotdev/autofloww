@@ -9,7 +9,7 @@ export async function GET(req: NextRequest) {
   });
 
   const products = await stripe.prices.list({
-    limit: 3,
+    limit: 4,
   });
 
   return NextResponse.json(products.data);

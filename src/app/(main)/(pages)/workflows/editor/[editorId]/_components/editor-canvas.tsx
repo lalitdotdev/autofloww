@@ -14,6 +14,8 @@ import ReactFlow, {
     NodeChange,
     ReactFlowInstance,
     addEdge,
+    applyEdgeChanges,
+    applyNodeChanges,
 } from 'reactflow'
 import {
     ResizableHandle,

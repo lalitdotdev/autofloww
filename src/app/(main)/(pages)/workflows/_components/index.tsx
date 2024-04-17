@@ -1,3 +1,4 @@
+import MoreCredits from './more-credits';
 import React from 'react'
 import Workflow from './workflow'
 import { onGetWorkflows } from '../_actions/workflow-connections';
@@ -10,6 +11,7 @@ const Workflows = async (props: Props) => {
     return (
         <div className="relative flex flex-col gap-4">
             <section className="flex flex-col m-2">
+                <MoreCredits />
                 {workflows?.length ? (
                     workflows.map((flow) => (
                         <Workflow
