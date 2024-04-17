@@ -29,12 +29,17 @@ const ProfilePicture = ({ userImage, onDelete, onUpload }: Props) => {
             <div className="flex h-[30vh] flex-col items-center justify-center">
                 {userImage ? (
                     <>
-                        <div className="relative h-full w-2/12">
+                        <div className="sm:m-0 relative shadow-lg rounded-full overflow-hidden h-[86px] w-[86px] md:h-[180px] md:w-[180px] flex justify-center items-center">
+                            {/* check if user has image then show image else show upload button */}
+
                             <Image
                                 src={userImage}
-                                alt="User_Image"
+
+                                alt=""
+                                className="rounded-full object-cover border-4 border-[#2F006B]"
                                 fill
                             />
+
                         </div>
                         <Button
                             onClick={onRemoveProfileImage}
