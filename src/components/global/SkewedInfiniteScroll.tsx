@@ -1,20 +1,15 @@
 
 const SkewedInfiniteScroll = () => {
     const items = [
-        { id: '1', text: 'Item' },
-        { id: '2', text: 'Another Item' },
-        { id: '3', text: 'Yet Another Item' },
-        { id: '4', text: 'Yet Another Item' },
-        { id: '5', text: 'Yet Another Item' },
-        { id: '6', text: 'Yet Another Item' },
-        {
-            id: '7',
-            text: 'Yet Another Item',
-        },
-        {
-            id: '8',
-            text: 'Yet Another Item',
-        },
+        { id: 1, text: 'Automate repetitive tasks' },
+        { id: 2, text: 'Integrate with your favorite tools' },
+        { id: 3, text: 'Build custom workflows' },
+        { id: 4, text: 'Streamline your workflows' },
+        { id: 5, text: 'Save time and reduce errors' },
+        { id: 6, text: 'Increase productivity' },
+        { id: 7, text: 'Focus on what matters most' },
+        { id: 8, text: 'Unlock your full potential' },
+
     ]
     return (
 
@@ -26,7 +21,7 @@ const SkewedInfiniteScroll = () => {
                     <div className="pointer-events-none absolute -left-1 z-10 h-full w-20 "></div>
                     <div className="pointer-events-none absolute -right-1 z-10 h-full w-20 "></div>
 
-                    <div className="animate-skew-scroll mx-auto grid h-[250px] w-[300px] grid-cols-1 gap-5 sm:w-[600px] sm:grid-cols-2">
+                    <div className="animate-skew-scroll mx-auto grid h-[300px] w-full grid-cols-1 gap-5 sm:w-full sm:grid-cols-2 ">
                         {items.map((item) => (
                             <div
                                 key={item.id}
