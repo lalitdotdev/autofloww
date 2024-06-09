@@ -19,7 +19,7 @@ const DashboardPage = async () => {
                 <p className="text-gray-600">
                     Here you can manage your connections, workflows, and more.
                 </p>
-                <div className="flex gap-10">
+                <div className="flex flex-col md:flex-row gap-10">
                     <div className='flex items-center gap-4' >
                         <Waypoints size={32} />
 
