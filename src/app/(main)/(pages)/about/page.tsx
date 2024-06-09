@@ -55,7 +55,7 @@ export default function About() {
 
                         </ul>
                         <span>
-                            Our mission is to help you save time, reduce errors, and focus on what matters most. We believe that automation is the key to unlocking your full potential, and we're here to support you every step of the way.
+                            Our mission is to help you save time, reduce errors, and focus on what matters most. We believe that automation is the key to unlocking your full potential, and we&apos;re here to support you every step of the way.
                         </span>
 
                         {/* <span>
