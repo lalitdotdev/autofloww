@@ -4,6 +4,7 @@ import { clients, products } from '@/lib/constant'
 import { Button } from '@/components/ui/button'
 import { CheckIcon } from 'lucide-react'
 import { ContainerScroll } from '@/components/global/container-scroll-animation'
+import Footer from '@/components/footer'
 import { HeroParallax } from '@/components/global/connect-parallax'
 import Image from 'next/image'
 import { InfiniteMovingCards } from '@/components/global/infinite-moving-cards'
@@ -30,7 +31,7 @@ export default function Home() {
                                     </span>
                                 </Button>
                                 <h1 className="text-5xl md:text-8xl  bg-clip-text text-transparent bg-gradient-to-b from-white to-neutral-600 font-sans font-bold">
-                                    Automate Your Work With Flux.
+                                    Automate Your Work With Floww.
                                 </h1>
                             </div>
                         }
@@ -191,6 +192,9 @@ export default function Home() {
                         </CardBody>
                     </CardContainer>
                 </div>
+            </section>
+            <section>
+                <Footer />
             </section>
         </main>
     )
