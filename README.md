@@ -1,5 +1,9 @@
 ## AutoFloww: Automate Your Workflows with Elegance and Efficiency (✨)
 
+
+![autofloww](https://socialify.git.ci/lalitdotdev/autofloww/image?font=Inter&language=1&logo=https%3A%2F%2Fsvgshare.com%2Fi%2F171N.svg&name=1&owner=1&pattern=Solid&theme=Dark)
+
+
 **Empower yourself with AutoFloww, a cutting-edge open-source automation platform designed to streamline your workflow and maximize productivity.**
 
 _Effortlessly connect your favorite tools like Discord, Slack, Notion, Google Drive, and more, and automate repetitive tasks with intuitive workflow creation. Whether you're a developer seeking a powerful automation solution or a business user yearning for streamlined processes, AutoFloww empowers you to:_
